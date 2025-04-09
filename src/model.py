@@ -1,14 +1,22 @@
-from transformers import MarianMTModel, MarianTokenizer
-from config import MODEL_PATH, SAVE_PATH, device
+from transformers import MarianMTModel, MarianTokenizer, BertModel, BertTokenizer
+from config import MBERT_PATH, MARIAN_PATH, SAVE_PATH, device
 
 
 def load_model():
-    tokenizer = MarianTokenizer.from_pretrained(MODEL_PATH)
-    model = MarianMTModel.from_pretrained(MODEL_PATH).to(device)
+    bert_tokenizer = BertTokenizer.from_pretrained(MBERT_PATH)
+    bert_model = BertModel.from_pretrained(MBERT_PATH).to(device)
 
-    print(f"Модель загружена на: {device}")
+    marian_tokenizer = MarianTokenizer.from_pretrained(MARIAN_PATH)
+    marian_model = MarianMTModel.from_pretrained(MARIAN_PATH).to(device)
 
-    return model, tokenizer
+    print(f"Модели загружены на: {device}")
+
+    return {
+        "bert_tokenizer": bert_tokenizer,
+        "bert_model": bert_model,
+        "marian_tokenizer": marian_tokenizer,
+        "marian_model": marian_model
+    }
 
 
 def save_model(model, tokenizer):

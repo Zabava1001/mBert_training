@@ -1,6 +1,6 @@
+from transformers import BertModel, BertTokenizer, MarianMTModel, MarianTokenizer
+
 import os
-from transformers import BertModel, BertTokenizer
-from transformers import MarianMTModel, MarianTokenizer
 
 
 bert_model_name = "bert-base-multilingual-cased"
