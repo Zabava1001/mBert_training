@@ -31,3 +31,8 @@ def tokenize_data(dataset):
         return model_inputs
 
     return dataset.map(preprocess_function, batched=True)
+
+
+if __name__=='__main__':
+    dataset = load_data()
+    data = tokenize_data(dataset)

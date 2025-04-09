@@ -5,8 +5,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 PROJECT_DIR = os.path.dirname(BASE_DIR)
 
-MBERT_PATH = os.path.join(PROJECT_DIR, "/mbart_encoder")
-MARIAN_PATH = os.path.join(PROJECT_DIR, "/marian_decoder")
+MBERT_PATH = os.path.join(PROJECT_DIR, "mbart_encoder")
+MARIAN_PATH = os.path.join(PROJECT_DIR, "marian_decoder")
 
 
 SAVE_PATH = os.path.join(PROJECT_DIR, 'mbert-marian-ru-ha')
