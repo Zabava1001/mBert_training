@@ -42,10 +42,10 @@ def load_model():
     return model, bert_tokenizer, marian_tokenizer
 
 
-def save_model(model, tokenizer=None):
-    model.save_pretrained(SAVE_PATH)
-    if tokenizer:
-        tokenizer.save_pretrained(SAVE_PATH)
+def save_model(model, tokenizer1, tokenizer2):
+    model.save_pretrained(SAVE_PATH, safe_serialization=False)
+    tokenizer1.save_pretrained(SAVE_PATH + "/bert")
+    tokenizer2.save_pretrained(SAVE_PATH + "/marian")
 
 
 if __name__=='__main__':

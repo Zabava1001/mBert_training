@@ -18,5 +18,4 @@ trainer = Trainer(
 )
 
 trainer.train()
-save_model(model, bert_tokenizer)
-save_model(marian_tokenizer)
+save_model(model, bert_tokenizer, marian_tokenizer)
