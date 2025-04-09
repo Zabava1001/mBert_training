@@ -22,8 +22,8 @@ MAX_LENGTH = 128  # Максимальная длина последовател
 TEST_SIZE = 0.1  # Доля данных для теста
 
 # Гиперпараметры обучения
-BATCH_SIZE_TRAIN = 8
-BATCH_SIZE_EVAL = 8
+BATCH_SIZE_TRAIN = 4
+BATCH_SIZE_EVAL = 4
 NUM_EPOCHS = 5
 LEARNING_RATE = 3e-5
 WEIGHT_DECAY = 0.01

@@ -39,11 +39,7 @@ def load_model():
 
     print(f"Модели загружены на: {device}")
 
-    return {
-        "model": model,
-        "bert_tokenizer": bert_tokenizer,
-        "marian_tokenizer": marian_tokenizer,
-    }
+    return model, bert_tokenizer, marian_tokenizer
 
 
 def save_model(model, tokenizer=None):
