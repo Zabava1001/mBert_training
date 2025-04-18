@@ -17,5 +17,9 @@ trainer = Trainer(
     eval_dataset=tokenized_dataset["test"]
 )
 
+save_model(model, bert_tokenizer, marian_tokenizer)
+print('Тестовое сохранение')
+
+
 trainer.train()
 save_model(model, bert_tokenizer, marian_tokenizer)

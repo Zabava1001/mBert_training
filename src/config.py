@@ -13,9 +13,9 @@ SAVE_PATH = os.path.join(PROJECT_DIR, 'mbert-marian-ru-ha')
 DATA_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset.xlsx')
 OUTPUT_PATH = os.path.join(PROJECT_DIR, 'output-ru-ha')
 
-SAMPLE_SIZE = 100
+SAMPLE_SIZE = 200
 
-device = "cuda" if torch.cuda.is_available() else "cpu"
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Параметры предобработки
 MAX_LENGTH = 128  # Максимальная длина последовательности
@@ -29,7 +29,8 @@ LEARNING_RATE = 3e-5
 WEIGHT_DECAY = 0.01
 
 # Опции логирования и сохранения
-SAVE_STRATEGY = "epoch"  # Сохранение модели раз в эпоху
+# SAVE_STRATEGY = "epoch"  # Сохранение модели раз в эпоху
+SAVE_STRATEGY = "no"
 SAVE_TOTAL_LIMIT = 2  # Количество сохраняемых чекпоинтов
 LOGGING_STEPS = 500  # Как часто логировать метрики
 

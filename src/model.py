@@ -1,5 +1,5 @@
 from transformers import MarianMTModel, MarianTokenizer, BertModel, BertTokenizer
-from config import MBERT_PATH, MARIAN_PATH, SAVE_PATH, device
+from src.config import MBERT_PATH, MARIAN_PATH, SAVE_PATH, DEVICE
 
 import torch
 import torch.nn as nn
@@ -27,25 +27,34 @@ class MBertToMarian(nn.Module):
 
         return marian_output
 
+    @classmethod
+    def from_pretrained_custom(cls, bert_path, marian_path):
+        bert = BertModel.from_pretrained(bert_path)
+        marian = MarianMTModel.from_pretrained(marian_path)
+        return cls(bert, marian)
+
 
 def load_model():
     bert_tokenizer = BertTokenizer.from_pretrained(MBERT_PATH)
-    bert_model = BertModel.from_pretrained(MBERT_PATH).to(device)
+    bert_model = BertModel.from_pretrained(MBERT_PATH).to(DEVICE)
 
     marian_tokenizer = MarianTokenizer.from_pretrained(MARIAN_PATH)
-    marian_model = MarianMTModel.from_pretrained(MARIAN_PATH).to(device)
+    marian_model = MarianMTModel.from_pretrained(MARIAN_PATH).to(DEVICE)
 
-    model = MBertToMarian(bert_model, marian_model).to(device)
+    model = MBertToMarian(bert_model, marian_model).to(DEVICE)
 
-    print(f"Модели загружены на: {device}")
+    print(f"Модели загружены на: {DEVICE}")
 
     return model, bert_tokenizer, marian_tokenizer
 
 
 def save_model(model, tokenizer1, tokenizer2):
-    model.save_pretrained(SAVE_PATH, safe_serialization=False)
-    tokenizer1.save_pretrained(SAVE_PATH + "/bert")
-    tokenizer2.save_pretrained(SAVE_PATH + "/marian")
+    model.bert.save_pretrained(SAVE_PATH + "/bert", safe_serialization=False)
+    model.marian.save_pretrained(SAVE_PATH + "/marian", safe_serialization=False)
+    torch.save(model.projection.state_dict(), SAVE_PATH + "/projection.pt")
+
+    tokenizer1.save_pretrained(SAVE_PATH + "/tokenizer_bert")
+    tokenizer2.save_pretrained(SAVE_PATH + "/tokenizer_marian")
 
 
 if __name__=='__main__':

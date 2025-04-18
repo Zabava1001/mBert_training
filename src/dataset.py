@@ -1,6 +1,6 @@
 from datasets import Dataset
 from transformers import MarianTokenizer, BertTokenizer
-from config import DATA_PATH, MBERT_PATH, MARIAN_PATH, MAX_LENGTH, TEST_SIZE
+from src.config import DATA_PATH, MBERT_PATH, MARIAN_PATH, MAX_LENGTH, TEST_SIZE
 
 import pandas as pd
 
