@@ -20,7 +20,7 @@ This project is aimed at training the mBert + MarianMT model for translation fro
      └── README.md            # Этот файл
 
 ## Model Information
-The model **mBert + MarianMT ** used for training will be stored in the "mbart_encoder/" and "marian_decoder/" directory, you can download it using the script:
+The model ** mBert + MarianMT ** used for training will be stored in the "mbart_encoder/" and "marian_decoder/" directory, you can download it using the script:
 
     python downloading_model.py
 
