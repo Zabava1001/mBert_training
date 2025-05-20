@@ -9,17 +9,17 @@ MBERT_PATH = os.path.join(PROJECT_DIR, "mbart_encoder")
 MARIAN_PATH = os.path.join(PROJECT_DIR, "marian_decoder")
 
 
-SAVE_PATH = os.path.join(PROJECT_DIR, 'mbert-marian-ru-ha')
-DATA_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset.xlsx')
-OUTPUT_PATH = os.path.join(PROJECT_DIR, 'output-ru-ha')
+SAVE_PATH = os.path.join(PROJECT_DIR, 'mbert-marian-ru-ha_new')
+DATA_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset2_top200.xlsx')
+OUTPUT_PATH = os.path.join(PROJECT_DIR, 'output-ru-ha_cleaned')
 
-SAMPLE_SIZE = 200
+SAMPLE_SIZE = 199
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Параметры предобработки
 MAX_LENGTH = 128  # Максимальная длина последовательности
-TEST_SIZE = 0.1  # Доля данных для теста
+TEST_SIZE = 0.99  # Доля данных для теста
 
 # Гиперпараметры обучения
 BATCH_SIZE_TRAIN = 4

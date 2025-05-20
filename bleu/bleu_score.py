@@ -58,7 +58,7 @@ with torch.no_grad():
 
 reference_sample = random_sample['khakas']
 
-for i in range(200):
+for i in range(199):
     print(f"Source: {random_sample[i]['russian']}")
     print(f"Translate: {translations_decoded[i]}")
     print(f"Target: {random_sample[i]['khakas']}")
