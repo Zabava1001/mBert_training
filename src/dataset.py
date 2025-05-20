@@ -5,8 +5,8 @@ from src.config import DATA_PATH, MBERT_PATH, MARIAN_PATH, MAX_LENGTH, TEST_SIZE
 import pandas as pd
 
 
-def load_data():
-    df = pd.read_excel(DATA_PATH, header=None)
+def load_data(path=DATA_PATH):
+    df = pd.read_excel(path, header=None)
     df = df.iloc[:, :2]
 
     df.columns = ["khakas", "russian"]

@@ -11,9 +11,10 @@ MARIAN_PATH = os.path.join(PROJECT_DIR, "marian_decoder")
 
 SAVE_PATH = os.path.join(PROJECT_DIR, 'mbert-marian-ru-ha')
 DATA_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset.xlsx')
+BLUE_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset2.xlsx')
 OUTPUT_PATH = os.path.join(PROJECT_DIR, 'output-ru-ha')
 
-SAMPLE_SIZE = 200
+SAMPLE_SIZE = 1000
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 

@@ -1,11 +1,38 @@
 from transformers import  BertTokenizer, MarianTokenizer, BertModel, MarianMTModel
 from transformers.modeling_outputs import BaseModelOutput
-from src.config import SAVE_PATH, MAX_LENGTH, SAMPLE_SIZE, DEVICE
+from src.config import SAVE_PATH, MAX_LENGTH, SAMPLE_SIZE, DEVICE, BATCH_SIZE_TRAIN, BLUE_PATH
 from src.dataset import load_data
 from src.model import MBertToMarian
 
 import evaluate
 import torch
+
+
+def generate_translations(inputs, model, tokenizer, batch_size=BATCH_SIZE_TRAIN):
+    predictions = []
+    input_ids = inputs['input_ids']
+    attention_mask = inputs['attention_mask']
+
+    for i in range(0, len(input_ids), batch_size):
+        input_ids_batch = input_ids[i:i+batch_size]
+        mask_batch = attention_mask[i:i+batch_size]
+
+        with torch.no_grad():
+            bert_outputs = model.bert(input_ids=input_ids_batch, attention_mask=mask_batch)
+            projected = model.projection(bert_outputs.last_hidden_state)
+
+            generated_ids = model.marian.generate(
+                encoder_outputs=BaseModelOutput(last_hidden_state=projected),
+                attention_mask=mask_batch,
+                max_length=MAX_LENGTH,
+                num_beams=4,
+                early_stopping=True
+            )
+
+        decoded = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
+        predictions.extend(decoded)
+
+    return predictions
 
 
 bert = BertModel.from_pretrained(SAVE_PATH + "/bert")
@@ -21,7 +48,7 @@ marian_tokenizer = MarianTokenizer.from_pretrained(SAVE_PATH + "/tokenizer_maria
 model.to(DEVICE)
 model.eval()
 
-dataset = load_data()
+dataset = load_data(path=BLUE_PATH)
 
 print(f"Train size: {len(dataset['train'])}")
 print(f"Test size: {len(dataset['test'])}")
@@ -38,25 +65,9 @@ inputs = bert_tokenizer(
 ).to(DEVICE)
 
 
-with torch.no_grad():
-    bert_outputs = model.bert(**inputs)
-    projected = model.projection(bert_outputs.last_hidden_state)
-
-    generated_ids = model.marian.generate(
-        encoder_outputs=BaseModelOutput(last_hidden_state=projected),
-        attention_mask=inputs['attention_mask'],
-        max_length=MAX_LENGTH,
-        num_beams=4,
-        early_stopping=True
-    )
-
-    translations_decoded = marian_tokenizer.batch_decode(
-        generated_ids,
-        skip_special_tokens=True
-    )
-
-
 reference_sample = random_sample['khakas']
+
+translations_decoded = generate_translations(inputs, model, marian_tokenizer)
 
 for i in range(199):
     print(f"Source: {random_sample[i]['russian']}")
