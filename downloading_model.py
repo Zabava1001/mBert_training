@@ -6,7 +6,7 @@ import os
 bert_model_name = "bert-base-multilingual-cased"
 marian_model_name = "Helsinki-NLP/opus-mt-ru-en"
 
-save_path_bert = "./mbart_encoder"
+save_path_bert = "./mbert_encoder"
 save_path_marian = "./marian_decoder"
 
 bert_tokenizer = BertTokenizer.from_pretrained(bert_model_name)
