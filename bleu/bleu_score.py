@@ -1,5 +1,11 @@
 from transformers import  BertTokenizer, MarianTokenizer, BertModel, MarianMTModel
 from transformers.modeling_outputs import BaseModelOutput
+
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from src.config import SAVE_PATH, MAX_LENGTH, SAMPLE_SIZE, DEVICE, BATCH_SIZE_TRAIN, BLUE_PATH
 from src.dataset import load_data
 from src.model import MBertToMarian

@@ -1,4 +1,10 @@
 from transformers import MarianMTModel, MarianTokenizer, BertModel, BertTokenizer
+
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 from src.config import MBERT_PATH, MARIAN_PATH, SAVE_PATH, DEVICE
 
 import torch
