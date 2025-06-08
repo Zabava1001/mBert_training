@@ -14,8 +14,7 @@ DATA_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset.xlsx')
 BLUE_PATH = os.path.join(PROJECT_DIR, 'data', 'dataset2.xlsx')
 OUTPUT_PATH = os.path.join(PROJECT_DIR, 'output-ru-ha')
 
-SAMPLE_SIZE = 1000
-
+SAMPLE_SIZE = 8700
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 # Параметры предобработки
@@ -25,7 +24,7 @@ TEST_SIZE = 0.1  # Доля данных для теста
 # Гиперпараметры обучения
 BATCH_SIZE_TRAIN = 4
 BATCH_SIZE_EVAL = 4
-NUM_EPOCHS = 5
+NUM_EPOCHS = 50
 LEARNING_RATE = 3e-5
 WEIGHT_DECAY = 0.01
 
