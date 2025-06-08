@@ -5,8 +5,8 @@ import os
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from src.config2 import TRAINING_ARGS
-from dataset import load_data, tokenize_data
+from src.config import TRAINING_ARGS
+from src.dataset import load_data, tokenize_data
 from model import load_model, save_model
 
 
